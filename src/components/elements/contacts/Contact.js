@@ -1,0 +1,35 @@
+import React from 'react'
+import Avatar from "react-avatar"
+import { Link } from 'react-router-dom'
+import { deleteContact } from '../../../actions/contactAction'
+import { useDispatch } from 'react-redux'
+
+const Contact = ({contact ,selecatAll}) => {
+  const dispatch = useDispatch()
+  const { name, phone,email,id} = contact
+  return (
+    <tr>
+    <td>
+    <div className='custom-control custom-checbox' >
+      <input  onChange={selecatAll} type="checkbox" className="custom-control-input" /> 
+      <label className="custom-control-label" ></label>
+    </div>
+    </td>
+    <td>
+      <Avatar className="mr-2" name={name} size="45" round={true} />{name}
+    </td>
+    <td>{phone}</td>
+    <td>{email}</td>
+    <td className="actions">
+       <Link to={`/contacts/edit/${id}`}>
+        <sapn className="material-icons mr-2">edit</sapn>
+      </Link>
+      <sapn className="material-icons  text-danger" onClick={() => dispatch(deleteContact(id))} >remove</sapn>
+      
+      </td>       
+  </tr>
+  )
+}
+
+export default Contact
+  
